@@ -1,0 +1,32 @@
+{
+    "name": "extraswoft/zipkin",
+    "type": "library",
+    "keywords": [
+        "php",
+        "swoole",
+        "swoft",
+        "zipkin",
+        "OpenTracing"
+    ],
+    "description": "zipkin-sdk for swoft",
+    "license": "Apache-2.0",
+    "require": {
+        "jcchavezs/zipkin-opentracing": "^0.1.2",
+        "psr/http-server-handler": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ExtraSwoft\\Zipkin\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.laravel-china.org"
+        }
+    },
+    "config": {
+        "secure-http": false
+    }
+}
