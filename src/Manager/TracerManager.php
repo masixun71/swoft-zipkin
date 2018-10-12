@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ExtraSwoft\Zipkin\Manager;
 
-
+use const OpenTracing\Formats\TEXT_MAP;
 use OpenTracing\GlobalTracer;
 use Swoft\Bean\Annotation\Bean;
 use Swoft\Bean\Annotation\Value;
@@ -66,6 +66,17 @@ class TracerManager
         }
 
         return $this->serverSpans[$cid];
+    }
+
+
+    public function getHeader()
+    {
+        $headers = [];
+        $cid = Coroutine::tid();
+        GlobalTracer::get()->inject($this->serverSpans[$cid]->getContext(), TEXT_MAP,
+            $headers);
+
+        return $headers;
     }
 
 

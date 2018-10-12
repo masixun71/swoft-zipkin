@@ -11,8 +11,8 @@ use Swoft\Bean\Annotation\Bean;
 use Swoft\Core\RequestContext;
 use Swoft\Http\Message\Middleware\MiddlewareInterface;
 use Swoft\Http\Message\Uri\Uri;
-use const OpenTracing\Formats\HTTP_HEADERS;
 use OpenTracing\GlobalTracer;
+use ZipkinOpenTracing\SpanContext;
 
 
 /**
@@ -37,9 +37,7 @@ class ZipkinMiddleware implements MiddlewareInterface
             RequestContext::getRequest()->getSwooleRequest()->header
         );
 
-        $hasRoot = !empty($spanContext->getBaggageItem('hasRoot'));
-
-        if ($hasRoot)
+        if ($spanContext instanceof SpanContext)
         {
             $span = GlobalTracer::get()->startSpan('server', ['child_of' => $spanContext]);
         }
@@ -58,12 +56,9 @@ class ZipkinMiddleware implements MiddlewareInterface
 
         $response = $handler->handle($request);
 
-        if (!$hasRoot)
-        {
-            $spanContext->withBaggageItem('hasRoot', '1');
-            GlobalTracer::get()->inject($span->getContext(), TEXT_MAP,
-                RequestContext::getRequest()->getSwooleRequest()->header);
-        }
+        $spanContext->withBaggageItem('hasRoot', '1');
+        GlobalTracer::get()->inject($span->getContext(), TEXT_MAP,
+            RequestContext::getRequest()->getSwooleRequest()->header);
 
         $span->finish();
         GlobalTracer::get()->flush();
