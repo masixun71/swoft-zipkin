@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Lib\HttpClient;
+namespace ExtraSwoft\Zipkin\Adapter;
 
 use ExtraSwoft\Zipkin\Manager\TracerManager;
 use Psr\Http\Message\RequestInterface;
