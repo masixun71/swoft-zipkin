@@ -13,6 +13,7 @@ use Zipkin\Reporters\Http;
 use Zipkin\Samplers\BinarySampler;
 use Zipkin\TracingBuilder;
 use ZipkinOpenTracing\Tracer;
+use ExtraSwoft\Zipkin\Factory\SwoftHttpFactory;
 
 /**
  * @Bean()
