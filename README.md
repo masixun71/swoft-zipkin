@@ -158,4 +158,4 @@ $client = new Client(['adapter' => new AddZipkinAdapter()]);
 
 
 # 后记
-####如果你想对全链路有更深的了解或者对我的项目实现有所了解，甚至想应用到其他php框架或者其他语言上去，可以看下我写的这篇文章[php全链路监控完全实现（swoft举例）](https://www.jianshu.com/p/7aace43ea2a1)
+如果你想对全链路有更深的了解或者对我的项目实现有所了解，甚至想应用到其他php框架或者其他语言上去，可以看下我写的这篇文章[php全链路监控完全实现（swoft举例）](https://www.jianshu.com/p/7aace43ea2a1)
