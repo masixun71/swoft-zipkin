@@ -56,7 +56,6 @@ class ZipkinMiddleware implements MiddlewareInterface
 
         $response = $handler->handle($request);
 
-        $spanContext->withBaggageItem('hasRoot', '1');
         GlobalTracer::get()->inject($span->getContext(), TEXT_MAP,
             RequestContext::getRequest()->getSwooleRequest()->header);
 
